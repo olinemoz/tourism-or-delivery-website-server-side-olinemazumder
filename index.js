@@ -13,13 +13,12 @@ app.use(cors())
 app.use(express.json())
 
 // MONGODB Integration
-const uri = `mongodb+srv://OlineMaz:ER3eIrOoD8cFsoNX@mern-practice.upqpe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_USERPASSWORD}@mern-practice.upqpe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 async function run() {
     try {
         await client.connect();
-        console.log("database connected")
         const database = client.db("travelBD");
         const travelLocations = database.collection("locations");
         const newOrders = database.collection("orders");
